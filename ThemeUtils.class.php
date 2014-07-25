@@ -174,7 +174,7 @@ class ThemeUtils{
 	 * Enables the Custom Links feature
 	 */
 	public static function enable_links_manager(){
-		LinksManager::get_instance();
+		LinksManager::getInstance();
 	}
 	
 	/**
