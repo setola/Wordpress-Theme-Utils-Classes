@@ -36,6 +36,7 @@ class SimpleMetabox {
 	/**
 	 * Prints the metabox markup
 	 * @param $post the current post
+	 * TODO: support for other input types and select :D
 	 */
 	public function metabox_html($post){
 		wp_nonce_field(__FILE__, $this->metaname.'_nonce');
@@ -44,15 +45,36 @@ class SimpleMetabox {
 		$rows = '';
 		foreach($this->fields as $field){
 			$th = HtmlHelper::standard_tag('th', $field['label'], array('class'=>''));
-			$td = HtmlHelper::standard_tag(
-				'td',
-				HtmlHelper::input(
-					$this->metaname.'['.$field['id'].']',
-					$field['type'],
-					array('value'=>$values[$field['id']], 'class'=>'large-text')
-				),
-				array('class'=>'')
-			);
+
+			switch($field['type']) {
+				case 'checkbox':
+					$input = HtmlHelper::input(
+						$this->metaname.'['.$field['id'].']',
+						$field['type'],
+						array(
+							'class'     =>  '',
+							'checked'  =>  empty($values[$field['id']]) ? '' : 'checked'
+						)
+					);
+					break;
+
+				case 'text':
+				default:
+					$input = HtmlHelper::input(
+						$this->metaname.'['.$field['id'].']',
+						$field['type'],
+						array_merge(array( 'value' => $values[$field['id']], 'class' => 'large-text' ), (array)$field['parms'])
+					);
+					break;
+			}
+
+			if(!empty($field['description'])){
+				$input .=
+					HtmlHelper::br()
+					. HtmlHelper::paragraph($field['description'], array('class'=>'description'));
+			}
+
+			$td = HtmlHelper::standard_tag('td', $input,array('class'=>''));
 			$tr = HtmlHelper::standard_tag('tr', $th."\n".$td);
 			$rows .= $tr;
 		}
