@@ -20,7 +20,7 @@ abstract class MetaboxesController {
 	/**
 	 * Build a new object
 	 *
-	 * @param $metabox_infos list of MetaboxInfo
+	 * @param $metabox_infos array list of MetaboxInfo
 	 */
 	protected function __construct( $metabox_infos ) {
 		$this->metabox_infos = $metabox_infos;
