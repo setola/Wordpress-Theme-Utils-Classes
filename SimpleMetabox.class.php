@@ -21,18 +21,16 @@ class SimpleMetabox {
 	public function __construct($metaname, $metabox, $fields){
 		$this->metabox = array_merge(
 			array(
-				'id'        =>  '',
+				'id'        =>  $metaname,
 				'title'     =>  '',
 				'post_type' =>  '',
 				'context'   =>  'advanced',
-				'priority'  =>  'default'
+				'priority'  =>  'default',
 			),
 			$metabox
 		);
 		$this->fields = $fields;
 		$this->metaname = $metaname;
-		add_action('add_meta_boxes', array(&$this, 'register_metaboxes'));
-		add_action('save_post', array(&$this, 'save_metabox_data'), 1);
 	}
 
 	/**
@@ -118,6 +116,18 @@ class SimpleMetabox {
 	 */
 	public function get_meta($post_id=null){
 		if(is_null($post_id)) $post_id = get_the_ID();
+		$values = get_post_meta($post_id, $this->metaname, true);
+
+		foreach($this->fields as $field){
+			if(empty($values[$field['id']])){
+				$values[$field['id']] = '';
+			}
+		}
+
+		return $values;
+
+		v($this->fields);
+		v(get_post_meta($post_id, $this->metaname, true));
 		return array_merge($this->fields, (array)get_post_meta($post_id, $this->metaname, true));
 	}
 } 
