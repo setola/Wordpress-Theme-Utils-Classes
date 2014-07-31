@@ -16,7 +16,12 @@ class LinksManager extends Singleton {
 	/**
 	 * Stores the name of custom post type
 	 */
-	const CUSTOM_LINKS_POST_TYPE = 'wtu-custom-links';
+	const POST_TYPE = 'wtu-custom-links';
+
+    /**
+     * Stores the name of the post meta where link details are saved
+     */
+    const META_NAME = '_link_details';
 
 	/**
 	 * @var SimpleMetabox stores the metabox used for Links Details
@@ -45,11 +50,11 @@ class LinksManager extends Singleton {
 	protected function __construct() {
 		$this->set_labels();
 		$this->metabox = new SimpleMetabox(
-			'_link_details',
+			self::META_NAME,
 			array(
 				//'id'        =>  $id,
 				'title'     => __( 'Link Details', 'wtu_framework' ),
-				'post_type' => self::CUSTOM_LINKS_POST_TYPE
+				'post_type' => self::POST_TYPE
 			),
 			array(
 				array(
@@ -131,7 +136,7 @@ class LinksManager extends Singleton {
 	 */
 	public function init() {
 		$this->register_custom_types();
-		add_post_type_support( self::CUSTOM_LINKS_POST_TYPE, 'thumbnail' );
+		add_post_type_support( self::POST_TYPE, 'thumbnail' );
 		if ( is_admin() ) {
 
 		} else {
@@ -150,7 +155,7 @@ class LinksManager extends Singleton {
 
 		global $post_type;
 
-		if ( is_admin() && 'Enter title here' == $input && self::CUSTOM_LINKS_POST_TYPE == $post_type ) {
+		if ( is_admin() && 'Enter title here' == $input && self::POST_TYPE == $post_type ) {
 			return __( 'Enter URL here', 'wtu_framework' );
 		}
 
@@ -162,7 +167,7 @@ class LinksManager extends Singleton {
 	 */
 	public function register_custom_types() {
 		register_post_type(
-			self::CUSTOM_LINKS_POST_TYPE,
+			self::POST_TYPE,
 			array(
 				'label'               => $this->label,
 				'description'         => $this->description,
@@ -185,8 +190,8 @@ class LinksManager extends Singleton {
 	 * Register the link details metabox and removes some useless one
 	 */
 	public static function remove_useless_metaboxes() {
-		remove_meta_box( 'fbseo', self::CUSTOM_LINKS_POST_TYPE, 'normal' );
-		remove_meta_box( 'wpseo_meta', self::CUSTOM_LINKS_POST_TYPE, 'normal' );
+		remove_meta_box( 'fbseo', self::POST_TYPE, 'normal' );
+		remove_meta_box( 'wpseo_meta', self::POST_TYPE, 'normal' );
 	}
 
 	/**
@@ -198,7 +203,7 @@ class LinksManager extends Singleton {
 	 */
 	public static function get_links( $args = array() ) {
 		$defaults = array(
-			'post_type' => self::CUSTOM_LINKS_POST_TYPE
+			'post_type' => self::POST_TYPE
 		);
 		$args     = wp_parse_args( $args, $defaults );
 
