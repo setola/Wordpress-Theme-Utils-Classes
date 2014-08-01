@@ -69,10 +69,6 @@ class ThemeUtils{
             self::include_once_file_if_exists(WORDPRESS_THEME_UTILS_PATH . WORDPRESS_THEME_UTILS_AUTOLOADER_RELATIVE_PATH);
         }
 
-        var_dump(get_stylesheet_directory().'/'
-            .WORDPRESS_THEME_UTILS_DIRNAME
-            .'/%classname%.class.php');
-
         if(class_exists('ClassAutoloader')) {
 			ClassAutoloader::get_instance()
 				// First search in the child theme dir

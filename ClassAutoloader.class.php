@@ -33,20 +33,7 @@ class ClassAutoloader {
 	 * Initializes the autoloader
 	 */
 	private function __construct() {
-		$this
-			// First search in the child theme dir
-			->add_loading_template(
-				get_stylesheet_directory().'/'
-				.self::WORDPRESS_THEME_UTILS_CLASS_DIR
-				.'/%classname%.class.php'
-			)
-			// then search into the parent theme dir
-			->add_loading_template(
-				get_template_directory().'/'
-				.self::WORDPRESS_THEME_UTILS_CLASS_DIR
-				.'/%classname%.class.php'
-			)
-			->register_autoload();
+		$this->register_autoload();
 	}
 	
 	/**
