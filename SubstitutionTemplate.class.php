@@ -24,8 +24,8 @@ class SubstitutionTemplate{
 	/**
 	 * Initializes the current object with default parameters
 	 */
-	public function __construct(){
-		
+	public function __construct($tpl=''){
+		$this->set_tpl($tpl);
 	}
 	
 	/**
