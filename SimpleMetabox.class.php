@@ -171,9 +171,5 @@ class SimpleMetabox {
         }
 
         return $values;
-
-        //v($this->fields);
-        //v(get_post_meta($post_id, $this->metaname, true));
-        return array_merge($this->fields, (array)get_post_meta($post_id, $this->metaname, true));
     }
 } 
