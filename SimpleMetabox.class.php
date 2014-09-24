@@ -20,11 +20,11 @@ class SimpleMetabox {
     public function __construct($metaname, $metabox, $fields) {
         $this->metabox = array_merge(
             array(
-                'id' => $metaname,
-                'title' => '',
+                'id'        => $metaname,
+                'title'     => '',
                 'post_type' => '',
-                'context' => 'advanced',
-                'priority' => 'default',
+                'context'   => 'normal',
+                'priority'  => 'high',
             ),
             $metabox
         );
@@ -38,7 +38,8 @@ class SimpleMetabox {
      * TODO: support for other input types and select :D
      */
     public function metabox_html($post) {
-        wp_nonce_field(__FILE__, $this->metaname . '_nonce');
+        wp_nonce_field($this->metaname, $this->metaname . '_nonce');
+
         $values = $this->get_meta($post->ID);
 
         $rows = '';
@@ -46,6 +47,14 @@ class SimpleMetabox {
             $th = HtmlHelper::standard_tag('th', $field['label'], array('class' => ''));
 
             switch ($field['type']) {
+                case 'select':
+                    $input = HtmlHelper::select(
+                        $this->metaname . '[' . $field['id'] . ']',
+                        $field['options'],
+                        array('value' => $values[$field['id']])
+                    );
+                    break;
+
                 case 'chebox-list':
                     $input = '';
                     if (count($field['options'])) {
@@ -54,8 +63,8 @@ class SimpleMetabox {
                                     $this->metaname . '[' . $field['id'] . '][' . $key . ']',
                                     'checkbox',
                                     array(
-                                        'id' => 'chebox-list-' . $field['id'] . '-' . $key,
-                                        'class' => '',
+                                        'id'      => 'chebox-list-' . $field['id'] . '-' . $key,
+                                        'class'   => '',
                                         'checked' => empty($values[$field['id']][$key]) ? '' : 'checked'
                                     )
                                 ) . PHP_EOL
@@ -70,7 +79,7 @@ class SimpleMetabox {
                         $this->metaname . '[' . $field['id'] . ']',
                         $field['type'],
                         array(
-                            'class' => '',
+                            'class'   => '',
                             'checked' => empty($values[$field['id']]) ? '' : 'checked'
                         )
                     );
@@ -130,12 +139,9 @@ class SimpleMetabox {
         }
 
         // Secondly we need to check if the user intended to change this value.
-        if (
-            !isset($_POST[$this->metaname . '_nonce'])
-            || !wp_verify_nonce($_POST[$this->metaname . '_nonce'], __FILE__)
-        ) {
-            return;
-        }
+        wp_verify_nonce($_POST[$this->metaname . '_nonce'], $this->metaname);
+        // TODO: understand how to make this check working :|
+        //check_admin_referer($this->metaname, $this->metaname . '_nonce');
 
         array_walk_recursive($_POST[$this->metaname], array(__CLASS__, 'sanitize_r'));
 
@@ -166,8 +172,8 @@ class SimpleMetabox {
 
         return $values;
 
-        v($this->fields);
-        v(get_post_meta($post_id, $this->metaname, true));
+        //v($this->fields);
+        //v(get_post_meta($post_id, $this->metaname, true));
         return array_merge($this->fields, (array)get_post_meta($post_id, $this->metaname, true));
     }
 } 
