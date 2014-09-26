@@ -47,6 +47,13 @@ class SimpleMetabox {
             $th = HtmlHelper::standard_tag('th', $field['label'], array('class' => ''));
 
             switch ($field['type']) {
+                case 'callback':
+                    if(is_callable($field['options']['callback'])){
+                        $box = isset($field['options']['box']) ? $field['options']['box'] : array();
+                        $input = call_user_func_array($field['options']['callback'], array($post, $box));
+                    }
+                    break;
+
                 case 'select':
                     $input = HtmlHelper::select(
                         $this->metaname . '[' . $field['id'] . ']',
