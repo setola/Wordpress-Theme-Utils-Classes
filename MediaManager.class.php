@@ -451,6 +451,15 @@ class MediaManager {
 	}
 
 	/**
+	 * Retrieves configuration for given set
+	 * @param string $set identifier of the set of elements
+	 * @return mixed list of options
+	 */
+	public static function get_option($set){
+		return self::$media_list[$set];
+	}
+
+	/**
 	 * Utitlity to retrieve the post meta for the given media set.
 	 *
 	 * If WPML is available and notthing is retrieved from the
