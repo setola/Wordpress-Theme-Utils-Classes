@@ -183,8 +183,10 @@
 		public function save_metabox_data($post_id) {
 			if (!isset($post_id))
 				return;
+			if ( defined('DOING_AUTOSAVE') && DOING_AUTOSAVE )
+				return $post_id;
 			if (!isset($_POST['post_type']))
-				return;
+				return $post_id;
 			// First we need to check if the current user is authorised to do this action.
 			if ('page' == $_POST['post_type']) {
 				if (!current_user_can('edit_page', $post_id))
