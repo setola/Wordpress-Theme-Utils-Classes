@@ -38,6 +38,17 @@ class SubstitutionTemplate{
 	}
 	
 	/**
+	 * Retrieves the markup for the given key
+	 * It returns false if the key isn't defined
+	 * @param string $key key to be searched
+	 */
+	public function get_markup($key){
+		if(isset($this->static_markup[$key]))
+			return $this->static_markup[$key];
+		return false;
+	}
+	
+	/**
 	 * Set the static markup; ie: prev\next\loading divs
 	 * @param string|array $key the searches to be substituted
 	 * @param string|array $markup html markups
