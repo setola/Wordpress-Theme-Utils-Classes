@@ -64,88 +64,28 @@
 
 				switch ($field['type']) {
 					case 'callback':
-						if (is_callable($field['options']['callback'])) {
-							$box = isset($field['options']['box']) ? $field['options']['box'] : array();
-							$input = call_user_func_array(
-								$field['options']['callback'], array(
-									$post,
-									$box
-								)
-							);
-						}
+						$input = $this->_markup_callback($field, $values, $post);
 						break;
 
 					case 'select':
-						$input = HtmlHelper::select(
-							$this->metaname . '[' . $field['id'] . ']', $field['options'],
-							array('value' => $values[$field['id']])
-						);
+						$input = $this->_markup_select($field, $values);
 						break;
 
 					case 'single-attachment':
-						$thumb = '';
-						if (is_numeric($values[$field['id']])) {
-                            $thumb = wp_get_attachment_link($values[$field['id']], 'thumbnail', false, true, false);
-						}
-
-                        $button_text = isset($field['parms']['data-button-text']) ? $field['parms']['data-button-text'] : __('Select from Media');
-						$input = $thumb . HtmlHelper::input(
-								'', 'button', array_merge(
-									array(
-										'value'                     => $button_text,
-										'class'                     => 'media-single-attachment',
-										'data-target-id'            => $this->metaname . '-' . $field['id'],
-										'data-thumb-id'             => $this->metaname . '-' . $field['id'] . '-thumb'
-									), (array)$field['parms']
-								)
-							) . HtmlHelper::input(
-								$this->metaname . '[' . $field['id'] . ']', 'hidden', //todo: change to hidden?
-								array_merge(
-									array(
-										'id'    => $this->metaname . '-' . $field['id'],
-										'value' => $values[$field['id']],
-										'class' => 'large-text'
-									), (array)$field['parms']
-								)
-							);
+						$input = $this->_markup_single_attachment($field, $values);
 						break;
 
 					case 'chebox-list':
-						$input = '';
-						if (count($field['options'])) {
-							foreach ($field['options'] as $key => $option) {
-								$input .= HtmlHelper::input(
-										$this->metaname . '[' . $field['id'] . '][' . $key . ']', 'checkbox', array(
-											'id'      => 'chebox-list-' . $field['id'] . '-' . $key,
-											'class'   => '',
-											'checked' => empty($values[$field['id']][$key]) ? '' : 'checked'
-										)
-									) . PHP_EOL . HtmlHelper::label(
-										$option, 'chebox-list-' . $field['id'] . '-' . $key
-									) . PHP_EOL . HtmlHelper::br();
-							}
-						}
+						$input = $this->_markup_checkbox_list($field, $values);
 						break;
 
 					case 'checkbox':
-						$input = HtmlHelper::input(
-							$this->metaname . '[' . $field['id'] . ']', $field['type'], array(
-								'class'   => '',
-								'checked' => empty($values[$field['id']]) ? '' : 'checked'
-							)
-						);
+						$input = $this->_markup_checkbox($field, $values);
 						break;
 
 					case 'text':
 					default:
-						$input = HtmlHelper::input(
-							$this->metaname . '[' . $field['id'] . ']', $field['type'], array_merge(
-								array(
-									'value' => $values[$field['id']],
-									'class' => 'large-text'
-								), (array)$field['parms']
-							)
-						);
+						$input = $this->_markup_text($field, $values);
 						break;
 				}
 
@@ -162,6 +102,98 @@
 
 			echo HtmlHelper::standard_tag(
 				'table', HtmlHelper::standard_tag('tbody', $rows), array('class' => 'form-table')
+			);
+		}
+
+		public function _markup_callback($field, $values, $post){
+			if (is_callable($field['options']['callback'])) {
+				$box = isset($field['options']['box']) ? $field['options']['box'] : array();
+				$input = call_user_func_array(
+					$field['options']['callback'],
+					array($post, $box, $values)
+				);
+			}
+			return $input;
+		}
+
+		public function _markup_select($field, $values){
+			return HtmlHelper::select(
+				$this->metaname . '[' . $field['id'] . ']', $field['options'],
+				array('value' => $values[$field['id']])
+			);
+		}
+
+		public function _markup_single_attachment($field, $values){
+			$thumb = '';
+			if (is_numeric($values[$field['id']])) {
+				$thumb = wp_get_attachment_link($values[$field['id']], 'thumbnail', false, true, false);
+			}
+
+			$button_text = isset($field['parms']['data-button-text']) ? $field['parms']['data-button-text'] : __('Select from Media');
+			$input = $thumb . HtmlHelper::input(
+					'', 'button', array_merge(
+						  array(
+							  'value'                     => $button_text,
+							  'class'                     => 'media-single-attachment',
+							  'data-target-id'            => $this->metaname . '-' . $field['id'],
+							  'data-thumb-id'             => $this->metaname . '-' . $field['id'] . '-thumb'
+						  ), (array)$field['parms']
+					  )
+				) . HtmlHelper::input(
+					$this->metaname . '[' . $field['id'] . ']', 'hidden', //todo: change to hidden?
+					array_merge(
+						array(
+							'id'    => $this->metaname . '-' . $field['id'],
+							'value' => $values[$field['id']],
+							'class' => 'large-text'
+						), (array)$field['parms']
+					)
+				);
+			return $input;
+		}
+
+		public function _markup_checkbox_list($field, $values){
+			$input = '';
+			if (count($field['options'])) {
+				foreach ($field['options'] as $key => $option) {
+					$input .= HtmlHelper::input(
+						$this->metaname . '[' . $field['id'] . '][' . $key . ']',
+						'checkbox',
+						array(
+                            'id'      => 'chebox-list-' . $field['id'] . '-' . $key,
+                            'class'   => '',
+                            'checked' => empty($values[$field['id']][$key]) ? '' : 'checked'
+                        )
+					) . PHP_EOL . HtmlHelper::label(
+						$option, 'chebox-list-' . $field['id'] . '-' . $key
+					) . PHP_EOL . HtmlHelper::br();
+				}
+			}
+			return $input;
+		}
+
+		public function _markup_checkbox($field, $values){
+			return HtmlHelper::input(
+				$this->metaname . '[' . $field['id'] . ']',
+				$field['type'],
+				array(
+					'class'   => '',
+					'checked' => empty($values[$field['id']]) ? '' : 'checked'
+				)
+			);
+		}
+
+		public function _markup_text($field, $values){
+			return HtmlHelper::input(
+				$this->metaname . '[' . $field['id'] . ']',
+				$field['type'],
+				array_merge(
+					array(
+						'value' => $values[$field['id']],
+						'class' => 'large-text'
+					),
+					(array)$field['parms']
+				)
 			);
 		}
 
