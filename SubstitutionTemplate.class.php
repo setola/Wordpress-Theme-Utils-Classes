@@ -24,8 +24,8 @@ class SubstitutionTemplate{
 	/**
 	 * Initializes the current object with default parameters
 	 */
-	public function __construct(){
-		
+	public function __construct($tpl=''){
+		$this->set_tpl($tpl);
 	}
 
 	public function minify_template(){
@@ -41,6 +41,17 @@ class SubstitutionTemplate{
 	public function set_tpl($tpl){
 		$this->tpl = $tpl;
 		return $this;
+	}
+	
+	/**
+	 * Retrieves the markup for the given key
+	 * It returns false if the key isn't defined
+	 * @param string $key key to be searched
+	 */
+	public function get_markup($key){
+		if(isset($this->static_markup[$key]))
+			return $this->static_markup[$key];
+		return false;
 	}
 	
 	/**

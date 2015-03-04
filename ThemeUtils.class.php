@@ -56,28 +56,35 @@ class ThemeUtils{
 		return self::$instance;
 	}
 
+    public static function include_once_file_if_exists($file){
+        if(file_exists($file))
+            include_once $file;
+    }
+
 	/**
 	 * Initializes the autoloader subsystem
 	 */
 	public static function enable_autoload_system(){
-		if(!class_exists('ClassAutoloader')){
-			include_once WORDPRESS_THEME_UTILS_PATH . WORDPRESS_THEME_UTILS_AUTOLOADER_RELATIVE_PATH;
-			ClassAutoloader::get_instance();
-		} else {
+		if(!class_exists('ClassAutoloader')) {
+            self::include_once_file_if_exists(WORDPRESS_THEME_UTILS_PATH . WORDPRESS_THEME_UTILS_AUTOLOADER_RELATIVE_PATH);
+        }
+
+        if(class_exists('ClassAutoloader')) {
 			ClassAutoloader::get_instance()
 				// First search in the child theme dir
 				->add_loading_template(
 					get_stylesheet_directory().'/'
-					.self::WORDPRESS_THEME_UTILS_CLASS_DIR
+					.WORDPRESS_THEME_UTILS_DIRNAME
 					.'/%classname%.class.php'
 				)
 				// then search into the parent theme dir
 				->add_loading_template(
 					get_template_directory().'/'
-					.self::WORDPRESS_THEME_UTILS_CLASS_DIR
+					.WORDPRESS_THEME_UTILS_DIRNAME
 					.'/%classname%.class.php'
 				);
 		}
+
 	}
 
 	/**
@@ -131,10 +138,16 @@ class ThemeUtils{
 		if(defined('WORDPRESS_THEME_UTILS_PATH')) return;
 
 		/**
-		 * The base path for Wordpress Theme Utils
+		 * The absolute base path for Wordpress Theme Utils
 		 */
 		if(!defined('WORDPRESS_THEME_UTILS_PATH'))
 			define('WORDPRESS_THEME_UTILS_PATH', dirname(dirname(__FILE__)));
+
+		/**
+		 * The main directory name for Wordpress Theme Utils
+		 */
+		if(!defined('WORDPRESS_THEME_UTILS_DIRNAME'))
+			define('WORDPRESS_THEME_UTILS_DIRNAME', trim(str_replace(WORDPRESS_THEME_UTILS_PATH,'', dirname(__FILE__)),'/\\'));
 
 		/**
 		 * Set to false to disable registration of Top Menu
@@ -167,14 +180,14 @@ class ThemeUtils{
 		 * Relative path for autoloader class
 		 */
 		if(!defined('WORDPRESS_THEME_UTILS_AUTOLOADER_RELATIVE_PATH'))
-			define('WORDPRESS_THEME_UTILS_AUTOLOADER_RELATIVE_PATH', '/classes/ClassAutoloader.class.php');
+			define('WORDPRESS_THEME_UTILS_AUTOLOADER_RELATIVE_PATH', '/'.WORDPRESS_THEME_UTILS_DIRNAME.'/ClassAutoloader.class.php');
 	}
 	
 	/**
 	 * Enables the Custom Links feature
 	 */
 	public static function enable_links_manager(){
-		LinksManager::get_instance();
+		LinksManager::getInstance();
 	}
 	
 	/**
