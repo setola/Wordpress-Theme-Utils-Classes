@@ -27,7 +27,13 @@ class SubstitutionTemplate{
 	public function __construct(){
 		
 	}
-	
+
+	public function minify_template(){
+		$this->tpl = str_replace(array("\n", "\r"), '', $this->tpl);
+		$this->tpl = preg_replace('@ {2,}@', ' ', $this->tpl);
+		return $this;
+	}
+
 	/**
 	 * Sets the substitutions template
 	 * @param string $tpl the template
