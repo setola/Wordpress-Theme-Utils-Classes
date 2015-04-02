@@ -1,4 +1,10 @@
 <?php
+
+namespace WPTU\Core\Metaboxes;
+
+use WPTU\Core\TemplateChecker;
+use WPTU\Core\Helpers\HtmlHelper;
+
 /**
  * Manages multiple media set
  *
@@ -218,7 +224,9 @@ class MediaManager {
 		$show_meta_box = false;
 
 		foreach(self::$media_list as $k => $elem){
-			$template_checker = new TemplateChecker($elem['include'], $elem['exclude']);
+            $template_checker = new TemplateChecker();
+            if(isset($elem['include'])) $template_checker->set_include($elem['include']);
+            if(isset($elem['exclude'])) $template_checker->set_exclude($elem['exclude']);
 			if($template_checker->check($template)) {
 				$show_meta_box = true;
 				break;
@@ -258,7 +266,9 @@ class MediaManager {
 		if(count(self::$media_list)){
 			$is_first = true;
 			foreach(self::$media_list as $k => $elem){
-				$template_checker = new TemplateChecker($elem['include'], $elem['exclude']);
+				$template_checker = new TemplateChecker();
+                if(isset($elem['include'])) $template_checker->set_include($elem['include']);
+                if(isset($elem['exclude'])) $template_checker->set_exclude($elem['exclude']);
 				if(!$template_checker->check($template)) continue;
 
 				$name = self::META_KEY_NAME.'-'.$elem['id'];

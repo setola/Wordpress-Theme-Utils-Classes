@@ -1,4 +1,7 @@
 <?php
+
+namespace WPTU\Core\Helpers;
+
 /**
  * stores the HtmlHelper and HtmlBuilder class definition
  */

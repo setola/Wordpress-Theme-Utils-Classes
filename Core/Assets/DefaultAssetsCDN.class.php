@@ -1,4 +1,7 @@
-<?php 
+<?php
+
+namespace WPTU\Core\Assets;
+
 /**
  * Maintains the code for DefaultAssetsCDN class
  */

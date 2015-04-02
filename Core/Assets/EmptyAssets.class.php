@@ -1,11 +1,13 @@
-<?php 
+<?php
+
+namespace WPTU\Core\Assets;
 
 /**
  * Stores the EmptyAssets class definition
  */
 
 /**
- * Creates an asset object withou any registered javascript nor css
+ * Creates an asset object without any registered javascript nor css
  * 
  * This is useful if you really want to optimize js and css
  * for your template

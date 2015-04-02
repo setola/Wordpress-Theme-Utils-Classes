@@ -1,4 +1,7 @@
-<?php 
+<?php
+
+namespace WPTU\Core\Helpers;
+
 /**
  * stores the HeadHelper class declaration
  */

@@ -1,5 +1,7 @@
 <?php
 
+namespace WPTU\Core;
+
 /**
  * This class describes a Singleton object
  * @author http://stackoverflow.com/questions/3126130/extending-singletons-in-php

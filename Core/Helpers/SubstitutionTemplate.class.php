@@ -1,4 +1,7 @@
-<?php 
+<?php
+
+namespace WPTU\Core\Helpers;
+
 /**
  * Stores the definition for class SubstitutionTemplate
  */

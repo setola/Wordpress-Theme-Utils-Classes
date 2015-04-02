@@ -1,16 +1,18 @@
 <?php 
 
+namespace WPTU\Core;
+
 class TemplateChecker{
 	private $include = array();
 	private $exclude = array();
 	
-	function __construct($include, $exclude){
+	function __construct($include = null, $exclude = null){
 		$this
 			->set_include($include)
 			->set_exclude($exclude);
 	}
 	
-	public function set_include($include){
+	public function set_include($include = array()){
 		$this->include = (array)$include;
 		return $this;
 	}

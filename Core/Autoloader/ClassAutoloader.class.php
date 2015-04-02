@@ -1,9 +1,13 @@
 <?php
+
+namespace WPTU\Core\Autoloader;
+
 /**
  * Contains the ClassAutoloader class definitions
  */
+use WPTU\Core\Singleton;
 
-/**
+    /**
  * Autoload needed classes
  * @author etessore
  * @version 1.0.2
@@ -19,10 +23,7 @@
  * 1.0.0
  * 	Initial release
  */
-class ClassAutoloader {
-	const WORDPRESS_THEME_UTILS_CLASS_DIR = 'classes';
-	
-	private static $instance = null;
+class ClassAutoloader extends Singleton {
 	
 	/**
 	 * @var array stores the path the system will scan for files
@@ -32,19 +33,8 @@ class ClassAutoloader {
 	/**
 	 * Initializes the autoloader
 	 */
-	private function __construct() {
-		$this->register_autoload();
-	}
-	
-	/**
-	 * Retrieves the singleton instance
-	 * @return ClassAutoloader
-	 */
-	public static function get_instance(){
-		if(is_null(self::$instance)){
-			self::$instance = new self;
-		}
-		return self::$instance;
+	protected function __construct() {
+		$this->registerAutoload();
 	}
 	
 	/**
@@ -52,7 +42,7 @@ class ClassAutoloader {
 	 * @param string $tpl the template
 	 * @return ClassAutoloader $this for chainability
 	 */
-	public function add_loading_template($tpl){
+	public function addLoadingTemplate($tpl){
 		$this->loading_template[] = $tpl;
 		return $this;
 	}
@@ -60,7 +50,7 @@ class ClassAutoloader {
 	/**
 	 * Register the autoload function to PHP
 	 */
-	public function register_autoload(){
+	public function registerAutoload(){
 		spl_autoload_register(array($this, 'loader'));
 	}
 	
@@ -70,10 +60,12 @@ class ClassAutoloader {
 	 * @return ClassAutoloader $this for chainability
 	 */
 	private function loader($className) {
+        $fileRelativePath = str_replace('\\', DIRECTORY_SEPARATOR, $className);
+
 		foreach($this->loading_template as $tpl){
 			$filename = str_replace(
 				array('%classname%'), 
-				array($className), 
+				array($fileRelativePath),
 				$tpl
 			);
 			if(file_exists($filename)) {
@@ -81,6 +73,9 @@ class ClassAutoloader {
 				return $this;
 			}
 		}
+
+
+
 		return $this;
 	}
 }

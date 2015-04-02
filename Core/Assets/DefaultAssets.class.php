@@ -1,4 +1,7 @@
-<?php 
+<?php
+
+namespace WPTU\Core\Assets;
+
 /**
  * Contains the DefaultAssets class
  */
