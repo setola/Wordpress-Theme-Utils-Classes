@@ -19,17 +19,13 @@ use WPTU\Core\Singleton;
  * loaded in the head or in the foot of the page.
  *
  * Uses ob_start and a placeholder for the assets.
- * It's a singleton beacause it has to be run only once
+ * It's a singleton because it has to be run only once
  *
  * @author etessore
  * @version 1.0.0
- * @package classes
- *
+ * @package WPTU\Core\Assets
  */
-
 class AutomaticAssetsManager extends Singleton{
-	
-	private static $instance = null;
 
 	/**
 	 * manages the list of css and js
@@ -75,17 +71,6 @@ class AutomaticAssetsManager extends Singleton{
 			->hook()
 			->enable_automatic_manager();
 	}
-	
-	/**
-	 * Retrieves the singleton instance for this feature
-	 * @return AutomaticAssetsManager unique instance
-	 */
-	public static function get_instance(){
-		if(is_null(self::$instance)){
-			self::$instance = new self;
-		}
-		return self::$instance;
-	}
 
 	/**
 	 * Adds a javascript to the current set
@@ -95,7 +80,7 @@ class AutomaticAssetsManager extends Singleton{
 	 * @param array $deps (optional) Array of script names on which this script depends
 	 * @param string|bool $ver (optional) Script version (used for cache busting), set to NULL to disable
 	 * @param bool $in_footer (optional) Whether to enqueue the script before </head> or before </body>
-	 * @return DefaultAssets $this for chainability
+	 * @return AutomaticAssetsManager $this for chainability
 	 */
 	public function add_js($handle, $src, $deps = array(), $ver = null, $in_footer = false){
 		$this->assets['js'][$handle] = array(
@@ -118,7 +103,7 @@ class AutomaticAssetsManager extends Singleton{
 	 * @param string|bool $ver String specifying the stylesheet version number. Set to NULL to disable.
 	 *  Used to ensure that the correct version is sent to the client regardless of caching.
 	 * @param string $media The media for which this stylesheet has been defined.
-	 * @return DefaultAssets $this for chainability
+	 * @return AutomaticAssetsManager $this for chainability
 	 */
 	public function add_css($handle, $src, $deps = array(), $ver = null, $media = false){
 		$this->assets['css'][$handle] = array(
@@ -134,7 +119,7 @@ class AutomaticAssetsManager extends Singleton{
 
 	/**
 	 * Hooks the assets registration into wordpress init hook
-	 * @return DefaultAssets $this for chainability
+	 * @return AutomaticAssetsManager $this for chainability
 	 */
 	public function hook(){
 		if(!is_admin()){
@@ -145,7 +130,7 @@ class AutomaticAssetsManager extends Singleton{
 	
 	/**
 	 * Enables the loading of assets from template part
-	 * @return DefaultAssets $this for chainability
+	 * @return AutomaticAssetsManager $this for chainability
 	 */
 	public function enable_automatic_manager(){
 		if(!$this->status && !is_admin()){
@@ -171,7 +156,7 @@ class AutomaticAssetsManager extends Singleton{
 	
 	/**
 	 * Disables the loading of assets from template part
-	 * @return DefaultAssets $this for chainability
+	 * @return AutomaticAssetsManager $this for chainability
 	 */
 	public function disable_automatic_manager(){
 			

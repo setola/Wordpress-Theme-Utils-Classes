@@ -2,6 +2,9 @@
 
 namespace WPTU\Core\Assets;
 
+use WPTU\Core\Assets\Assets;
+use WPTU\Core\Assets\AutomaticAssetsManager;
+
 /**
  * Maintains the code for DefaultAssetsCDN class
  */
@@ -17,7 +20,12 @@ namespace WPTU\Core\Assets;
  * @package classes
  * 
  */
-class DefaultAssetsCDN extends DefaultAssets{
+class DefaultAssetsCDN extends Assets{
+
+    public function __construct(){
+        parent::__construct(AutomaticAssetsManager::getInstance());
+    }
+
 	/**
 	 * (non-PHPdoc)
 	 * @see DefaultAssets::register_standard()
@@ -52,6 +60,9 @@ class DefaultAssetsCDN extends DefaultAssets{
 		
 		return $this;
 	}
+
+    
+    public function register_custom(){ return $this; }
 	
 	/**
 	 * Register some jQuery UI themes from code.jquery.com CDN
