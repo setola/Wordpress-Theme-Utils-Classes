@@ -3,6 +3,8 @@
  * Stores GeneratorDictionary class definitions
  */
 
+namespace WPTU\Core\Helpers\LoremIpsum;
+
 /**
  * Maintans a set of words for a sentences generator
  * @author etessore

@@ -3,6 +3,9 @@
  * Contains the LipsumGenerator 
  */
 
+namespace WPTU\Core\Helpers\LoremIpsum;
+use WPTU\Core\Helpers\HtmlHelper;
+
 /**
  * Generates Lorem Ipsum text
  * @author etessore
@@ -320,7 +323,7 @@ class LipsumGenerator {
 					break;
 
 				default:
-					throw new InvalidArgumentException(sprintf("Unsupported format '%s'", $format));
+					throw new \InvalidArgumentException(sprintf("Unsupported format '%s'", $this->format));
 			}
 		}
 		return $this;
@@ -346,7 +349,7 @@ class LipsumGenerator {
 			$rendered_p = '';
 			
 			if($is_first_p){
-				$this->force_beginning(&$paragraph);
+				$this->force_beginning($paragraph);
 			} else {
 				$rendered_p .= "\n";
 			}
@@ -373,7 +376,7 @@ class LipsumGenerator {
 			$rendered_p = '';
 			
 			if($is_first_p){
-				$this->force_beginning(&$paragraph);
+				$this->force_beginning($paragraph);
 			} else {
 				$rendered_p .= "\n\n\t";
 			}
@@ -400,7 +403,7 @@ class LipsumGenerator {
 			$rendered_p = '';
 			
 			if($is_first_p){
-				$this->force_beginning(&$paragraph);
+				$this->force_beginning($paragraph);
 			} else {
 				$rendered_p .= "\n";
 			}
@@ -482,7 +485,7 @@ class LipsumGenerator {
 			$rendered_p = '';
 			
 			if($is_first_p){
-				$this->force_beginning(&$paragraph);
+				$this->force_beginning($paragraph);
 			} else {
 				$rendered_p .= "\n";
 			}

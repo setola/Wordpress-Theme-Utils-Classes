@@ -3,6 +3,8 @@
  * contains LoremIpsumDictionary class definition
  */
 
+namespace WPTU\Core\Helpers\LoremIpsum;
+
 /**
  * Stores the dictionary for generating 'Lorem ipsum...' text
  * @author etessore
