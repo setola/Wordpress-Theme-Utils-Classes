@@ -2,6 +2,11 @@
 /**
  * stores the ImageGenerator class definition
  */
+
+namespace WPTU\Core\Helpers\ImageGenerators;
+
+use WPTU\Core\Helpers\HtmlHelper;
+
 /**
  * Generates paceholder images
  * @author etessore
@@ -98,9 +103,13 @@ class ImageGenerator{
 	
 	/**
 	 * Generates an image
+	 * @throw Exception if GD Libs are not installed on your host
 	 * @return ImageGenerator $this for chainability
 	 */
 	private function generate_image(){
+		if(!function_exists('imagecreate')){
+			throw new \Exception('GD Libs are missing. Please install them on your host server.');
+		}
 		$this->image = imagecreate($this->get_image_width(), $this->get_image_height());
 		
 		$bg_color = self::get_rgb($this->settings['bg_color']);

@@ -3,6 +3,7 @@
  * Contains AjaxImageGenerator class definition
  */
 
+namespace WPTU\Core\Helpers\ImageGenerators;
 
 /**
  * Hooks the ImageGenerator class to admin-ajax action

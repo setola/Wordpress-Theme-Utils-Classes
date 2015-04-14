@@ -3,6 +3,11 @@
  * stores the EscapeRoute class definition
  */
 
+namespace WPTU\Core\Helpers;
+
+use WPTU\Core\Helpers\HtmlHelper;
+use WPTU\Core\Helpers\SubstitutionTemplate;
+
 /**
  * Manages the navigation links on a 404 page
  * @author etessore
@@ -69,7 +74,7 @@ EOF;
 	 * @return EscapeRoute $this for chainability
 	 */
 	public function add_link($href, $label, $params=''){
-		$tmp 			= new stdClass();
+		$tmp 			= new \stdClass();
 		$tmp->href 		= $href;
 		$tmp->label 	= $label;
 		$tmp->params 	= $params;
@@ -98,7 +103,7 @@ EOF;
 	
 	/**
 	 * Renders the list of anchors
-	 * @return the rendered the list of anchors
+	 * @return string the rendered the list of anchors
 	 */
 	protected function render_list(){
 		$toret = '';
@@ -115,7 +120,7 @@ EOF;
 	
 	/**
 	 * Retrieves the markup
-	 * @returns the markup
+	 * @returns string the markup
 	 */
 	public function get_markup(){
 		return $this->templates
