@@ -1,5 +1,7 @@
 <?php
 
+namespace WPTU\FastBooking\Offers;
+
 /**
  * Class SpecialOffersSnippedCached
  * Manages the cache subsystem for the special offers snippet

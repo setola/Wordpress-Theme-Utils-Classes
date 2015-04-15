@@ -3,6 +3,8 @@
  * Contains the SpecialOffersSnippetAjax class
  */
 
+namespace WPTU\FastBooking\Offers;
+
 /**
  * Hook to WP Ajax system to get the special offers snippet url
  * @author etessore

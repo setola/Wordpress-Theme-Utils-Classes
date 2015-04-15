@@ -3,6 +3,8 @@
  * containst SpecialOffersSnippet class definition
  */
 
+namespace WPTU\FastBooking\Offers;
+
 /**
  * Manages the integration of the special offers snippet
  * @author etessore
