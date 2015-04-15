@@ -3,7 +3,10 @@
  * Contains ImageProgressiveLoading class definition
  */
 
-
+namespace WPTU\Views\Galleries;
+use WPTU\Core\Helpers\GalleryHelper;
+use WPTU\Core\Helpers\HtmlHelper;
+use WPTU\Core\Helpers\ThemeHelpers;
 
 /**
  * Takes care of image sequential loading with jQuery Cycle 2

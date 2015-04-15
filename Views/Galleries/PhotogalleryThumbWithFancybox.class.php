@@ -3,6 +3,11 @@
  * stores the PhotogalleryThumbWithFancybox class 
  */
 
+namespace WPTU\Views\Galleries;
+use WPTU\Core\Helpers\GalleryHelper;
+use WPTU\Core\Helpers\SubstitutionTemplate;
+use WPTU\Core\Helpers\ThemeHelpers;
+
 /**
  * Manages images and markup for a photogallery where 
  * clicking on a little thumb opens the big image in fancybox 

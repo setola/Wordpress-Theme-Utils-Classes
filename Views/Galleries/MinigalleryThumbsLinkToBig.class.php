@@ -3,6 +3,12 @@
  * storest MinigalleryThumbsLinkToBig class definition
  */
 
+namespace WPTU\Views\Galleries;
+use WPTU\Core\Helpers\GalleryHelper;
+use WPTU\Core\Helpers\SubstitutionTemplate;
+use WPTU\Core\Helpers\HtmlHelper;
+use WPTU\Core\Helpers\ThemeHelpers;
+
 /**
  * Generates a list of thumbnail each one is an anchor 
  * to the image with 'full' media dimensions.

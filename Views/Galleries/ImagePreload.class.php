@@ -3,7 +3,9 @@
  * Contains ImagePreload class definition
  */
 
-
+namespace WPTU\Views\Galleries;
+use WPTU\Core\Helpers\GalleryHelper;
+use WPTU\Core\Helpers\ThemeHelpers;
 
 /**
  * Takes care of image preloading with jQuery imagesloaded

@@ -3,6 +3,10 @@
  * Contains OneImageForAll class definitions
  */
 
+namespace WPTU\Views\Galleries;
+use WPTU\Core\Helpers\GalleryHelper;
+use WPTU\Core\Helpers\SubstitutionTemplate;
+
 /**
  * Merges all images of a gallery in only one and serve it as a sprite
  * Important: every image have the same sizes and jpeg quality.

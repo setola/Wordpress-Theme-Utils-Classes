@@ -2,6 +2,12 @@
 /**
  * Stores the MinigalleryBigImageWithThumbs class definition
  */
+
+namespace WPTU\Views\Galleries;
+use WPTU\Core\Helpers\GalleryHelper;
+use WPTU\Core\Helpers\ThemeHelpers;
+use WPTU\Core\Helpers\HtmlHelper;
+
 /**
  * Manages the markup for the minigallery 
  * with a big image and some small thumbs
@@ -9,6 +15,7 @@
  * @version 1.0.0
  * @package classes
  */
+
 class MinigalleryBigImageWithThumbs extends GalleryHelper{
 	/**
 	 * @var array stores the sizes of the images

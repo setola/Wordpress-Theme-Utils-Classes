@@ -1,6 +1,10 @@
-<?php 
+<?php
 
+namespace WPTU\Views\Galleries;
 
+use WPTU\Core\Helpers\GalleryHelper;
+use WPTU\Core\Helpers\SubstitutionTemplate;
+use WPTU\Core\Helpers\HtmlHelper;
 
 class BootstrapCarousel extends GalleryHelper{
 	public $container_classes;

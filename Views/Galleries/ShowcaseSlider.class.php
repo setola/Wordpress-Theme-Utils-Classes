@@ -3,7 +3,9 @@
  * Definition Class for ShowcaseSlider
  */
 
-
+namespace WPTU\Views\Galleries;
+use WPTU\Core\Helpers\GalleryHelper;
+use WPTU\Core\Helpers\ThemeHelpers;
 
 /**
  *

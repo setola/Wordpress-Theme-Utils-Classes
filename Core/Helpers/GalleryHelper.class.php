@@ -2,6 +2,9 @@
 /**
  * Stores the GalleryHelper class definition
  */
+
+namespace WPTU\Core\Helpers;
+
 /**
  * Manages the markup for a generic set of images
  * Extend this with your nice and candy classes!
@@ -9,9 +12,8 @@
  * @version 1.0.2
  * @package classes
  * @subpackage image manager
- * @todo remove using of FeatureWithAssets
  */
-abstract class GalleryHelper /*extends FeatureWithAssets*/{
+abstract class GalleryHelper {
 
 	/**
 	 * @var string the unique id for the current gallery
