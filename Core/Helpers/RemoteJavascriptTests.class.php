@@ -28,10 +28,11 @@ class RemoteJavascriptTests extends Singleton{
 
     /**
      * Sets the user agent Javascript data will be showed to.
+     * The JS data will be shown only if the client user agent contains the given sctring
      * @param string $user_agent the user agent string
      * @return $this RemoteJavascriptTests for chainability
      */
-    public function set_user_agent($user_agent) {
+    public function set_user_agent_contains($user_agent) {
         $this->user_agent = $user_agent;
 
         return $this;
@@ -47,9 +48,7 @@ class RemoteJavascriptTests extends Singleton{
 
         return $this;
     }
-
-
-
+    
     /**
      * Adds a test with given key and value
      * @param $key string the key
@@ -113,6 +112,7 @@ class RemoteJavascriptTests extends Singleton{
      * Useful to read the information on a external node.js environment (ex zombiejs)
      */
     public function on_print_footer_script(){
-        echo HtmlHelper::script($this->variable_name. ' = ' . json_encode($this->tests) . ';');
+        if(empty($this->user_agent) || strpos($_SERVER['HTTP_USER_AGENT'], $this->user_agent) !== false)
+            echo HtmlHelper::script($this->variable_name. ' = ' . json_encode($this->tests) . ';');
     }
 }
