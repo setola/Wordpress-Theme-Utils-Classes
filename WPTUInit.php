@@ -1,13 +1,11 @@
 <?php
-
-include_once 'Core/ThemeUtils.class.php';
-
 /**
  * Initializes the WordPress Theme Utils.
  * Use this in your child theme functions.php
  */
 function wtu_init(){
-    \WPTU\ThemeUtils::getInstance();
+    include_once 'Core/ThemeUtils.class.php';
+    \WPTU\Core\ThemeUtils::getInstance();
 
     /**
      * Register some standard assets

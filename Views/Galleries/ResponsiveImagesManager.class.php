@@ -1,4 +1,8 @@
-<?php 
+<?php
+
+namespace WPTU\Views\Galleries;
+use WPTU\Core\Helpers\HtmlHelper;
+
 /**
  * Manages the placeholder for various responsive design breakpoints.
  * 

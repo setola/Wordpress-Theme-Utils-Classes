@@ -3,6 +3,11 @@
  * stores the ShowItemExcerptWalkerNavMenu class definition
  */
 
+namespace WPTU\Core\Walkers;
+use \Walker_Nav_Menu;
+use WPTU\Core\Helpers\SubstitutionTemplate;
+use WPTU\Core\Helpers\HtmlHelper;
+
 /**
  * Shows the title, the post thumbnail 
  * and the excerpt for every menu entry.

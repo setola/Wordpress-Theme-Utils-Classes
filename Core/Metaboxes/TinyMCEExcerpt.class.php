@@ -3,6 +3,8 @@
  * Contains TinyMCEExcerptCustomization class definition
  */
 
+namespace WPTU\Core\Metaboxes;
+
 /**
  * This class removes the default excerpt metabox
  * and adds a new box with the wysiwyg editor capability

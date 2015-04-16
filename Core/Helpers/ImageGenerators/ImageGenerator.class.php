@@ -167,7 +167,7 @@ class ImageGenerator{
 			$text_position_x,
 			$text_position_y,
 			imagecolorallocate($this->image, $text_color['red'], $text_color['green'], $text_color['blue']), 
-			WORDPRESS_THEME_UTILS_PATH . '/fonts/DS-Digital.ttf', 
+			WORDPRESS_THEME_UTILS_PATH . '/Fonts/DS-Digital.ttf',
 			$image_text
 		);
 		

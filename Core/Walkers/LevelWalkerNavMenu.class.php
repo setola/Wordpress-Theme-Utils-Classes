@@ -3,6 +3,9 @@
  * stores the LevelWalkerNavMenu class definition
  */
 
+namespace WPTU\Core\Walkers;
+use \Walker_Nav_Menu;
+
 /**
  * Adds the level for the current menu element
  * @author etessore

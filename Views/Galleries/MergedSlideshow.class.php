@@ -1,4 +1,9 @@
-<?php 
+<?php
+
+namespace WPTU\Views\Galleries;
+use WPTU\Views\Galleries\OneImageForAll;
+use WPTU\Core\Helpers\ThemeHelpers;
+
 /**
  * Merge all the images into a big one and serve it as div background
  * 
@@ -61,7 +66,7 @@ EOF;
 	/**
 	 * Retrives the images for the slideshow
 	 * @param int $post_id the post id to dig in
-	 * @return Slideshow $this for chainability
+	 * @return MergedSlideshow $this for chainability
 	 */
 	function get_the_images($post_id = null){
 

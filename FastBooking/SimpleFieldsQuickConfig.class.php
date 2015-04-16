@@ -3,6 +3,8 @@
  * Contains SimpleFieldsQuickConfig class definition
  */
 
+namespace WPTU\FastBooking;
+
 /**
  * Perform a quick configuration for Simple Fields plugin
  * 

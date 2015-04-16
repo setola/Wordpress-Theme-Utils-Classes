@@ -4,6 +4,11 @@
  * Stores ShortcodeForTabs class definition
  */
 
+namespace WPTU\Core\Shortcodes;
+use WPTU\Core\Helpers\SubstitutionTemplate;
+use WPTU\Core\Helpers\ThemeHelpers;
+use WPTU\Core\Helpers\HtmlHelper;
+
 //remove_filter('the_content', 'wpautop');
 //add_filter('the_content', 'wpautop' , 12);
 

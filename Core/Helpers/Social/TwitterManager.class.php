@@ -4,6 +4,7 @@
  * Contains the definition of class TwitterManager
  */
 
+namespace WPTU\Core\Helpers\Social;
 
 /**
  * Manages the connection with Twitter

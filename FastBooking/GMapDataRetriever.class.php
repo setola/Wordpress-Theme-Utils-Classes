@@ -3,6 +3,10 @@
  * Stores the GMapDataRetriever class definition
  */
 
+namespace WPTU\FastBooking;
+use WPTU\Core\Helpers\ThemeHelpers;
+use WPTU\Core\Helpers\HtmlHelper;
+
 /**
  * Retrieves GMaps data for the gmap.js integration
  * @author etessore

@@ -3,6 +3,10 @@
  * stores the class for LinksManager feature
  */
 
+namespace WPTU\Core\Helpers;
+use WPTU\Core\Singleton;
+use WPTU\Core\Metaboxes\SimpleMetabox;
+
 /**
  * Manages the links subsection
  *

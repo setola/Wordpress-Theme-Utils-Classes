@@ -3,6 +3,9 @@
  * stores the HashAnchorWalkerNavMenu class definition
  */
 
+namespace WPTU\Core\Walkers;
+use \Walker_Nav_Menu;
+
 /**
  * Menu Walker to have the la tocke of the url as hash
  * ex: http://www.fastbooking.net/clients/#africa

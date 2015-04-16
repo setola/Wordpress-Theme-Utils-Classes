@@ -48,7 +48,7 @@ class RemoteJavascriptTests extends Singleton{
 
         return $this;
     }
-    
+
     /**
      * Adds a test with given key and value
      * @param $key string the key

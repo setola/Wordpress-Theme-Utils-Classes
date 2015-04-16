@@ -1,4 +1,8 @@
-<?php 
+<?php
+
+namespace WPTU\FastBooking;
+use WPTU\Core\Helpers\HtmlHelper;
+
 /**
  * Manages multiple hotels in a single website
  * 

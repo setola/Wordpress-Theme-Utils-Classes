@@ -3,6 +3,9 @@
  * Definition of OffersManager feature
  */
 
+namespace WPTU\FastBooking\Offers;
+use WPTU\Core\Singleton;
+use WPTU\Core\Helpers\HtmlHelper;
 
 /**
  * Manage the Offers linked to the booking engine by promo code

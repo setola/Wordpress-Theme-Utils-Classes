@@ -1,5 +1,8 @@
 <?php
 
+namespace WPTU\Core\Metaboxes;
+use WPTU\Core\Helpers\HtmlHelper;
+
 	/**
 	 * Created by PhpStorm.
 	 * User: etessore

@@ -3,6 +3,7 @@
  * Stores class for inserting initial datas into a new blog
  */
 
+namespace WPTU\FastBooking;
 
 /**
  * Fills the brand new blog with starting data

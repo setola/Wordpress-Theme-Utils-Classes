@@ -1,6 +1,6 @@
 <?php
 
-namespace WPTU;
+namespace WPTU\Core;
 
 include_once 'Singleton.class.php';
 include_once 'Autoloader/ClassAutoloader.class.php';

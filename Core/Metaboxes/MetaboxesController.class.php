@@ -3,6 +3,9 @@
  * stores MetaboxesController class definition
  */
 
+namespace WPTU\Core\Metaboxes;
+use WPTU\Core\TemplateChecker;
+
 /**
  * Generic abstract metaboxes controller: decides which metaboxes are to be shown on the various page of the website
  */

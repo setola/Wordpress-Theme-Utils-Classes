@@ -3,6 +3,9 @@
  * stores MetaboxInfo class definition
  */
 
+namespace WPTU\Core\Metaboxes;
+use WPTU\Core\Metaboxes\SimpleMetabox;
+
 /**
  * Manages infos on a single metabox
  */

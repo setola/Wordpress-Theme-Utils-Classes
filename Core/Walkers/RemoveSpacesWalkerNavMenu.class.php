@@ -3,6 +3,9 @@
  * contains RemoveSpacesWalkerNavMenu class definition
  */
 
+namespace WPTU\Core\Walkers;
+use \Walker_Nav_Menu;
+
 /**
  * Remove spaces and newlines from the current menu.
  * This is very useful if you want to style a menu with:
