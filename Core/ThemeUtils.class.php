@@ -11,7 +11,7 @@ use WPTU\Core\Helpers\ThemeHelpers;
 use WPTU\Core\Metaboxes\MediaManager;
 use WPTU\Core\Singleton;
 use WPTU\Core\Autoloader\ClassAutoloader;
-use WPTU\Core\DebugUtils;
+use WPTU\Core\Helpers\DevUtils\DebugUtils;
 
 /**
  * Stores the code for the parent theme setting initialization and management
